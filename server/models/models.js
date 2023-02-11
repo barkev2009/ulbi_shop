@@ -105,14 +105,14 @@ Rating.belongsTo(Device);
 Device.hasMany(CartDevice);
 CartDevice.belongsTo(Device);
 
-Device.hasMany(DeviceInfo);
+Device.hasMany(DeviceInfo, {as: 'info'});
 DeviceInfo.belongsTo(Device);
 
 Type.belongsToMany(Brand, {through: TypeBrand});
 Brand.belongsToMany(Type, {through: TypeBrand} );
 
-Device.hasOne(Image);
-Image.belongsTo(Device);
+Device.hasOne(Image, {as: 'image', foreignKey: 'deviceId'});
+Image.belongsTo(Device, {foreignKey: 'deviceId'});
 
 module.exports = {
     User, Cart, CartDevice, Device, Type, Brand, Rating, TypeBrand, DeviceInfo, Image
